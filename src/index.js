@@ -3,8 +3,6 @@ const { Toolkit } = require("actions-toolkit")
 const { appendFile } = require("fs").promises
 const getRandomInt = require('./random')
 
-const dotenv = require('dotenv-extended').load();
-
 const env = autoParse({
   GIT_BRANCH: process.env.GIT_BRANCH || process.env.GITHUB_REF.replace(/^refs\/heads\//, ''),
   ...dotenv.load({errorOnMissing: true, includeProcessEnv: true}),
