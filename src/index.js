@@ -1,5 +1,6 @@
 const { Toolkit } = require("actions-toolkit")
-const { appendFile } = require("fs").promises
+// const { appendFile } = require("fs").promises
+const fs = require('fs')
 const autoParse = require('auto-parse')
 const dotenv = require("dotenv-extended")
 const getRandomInt = require('./random')
@@ -45,9 +46,27 @@ const commitFile = async (tools, message) => {
 const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
 
 const getContentFile = () => `Contribution ${new Date().toISOString()}`
-const appendREADME = async content => {
-  await appendFile(localPath, "README.md", content)
+// const appendREADME = async content => {
+//   await appendFile(localPath, "README.md", content)
+// }
+
+const appendDataToFile = async (path, data) => {
+  await fs.promises.appendFile(path, data)
+  const buff = await fs.promises.readFile(path)
+
+  const content = buff.toString()
+  console.log(`Content : ${content}`)
 }
+
+const appendREADME = async content => {
+  await appendDataToFile("./clone/README.md", content)
+}
+
+// appendDataToFile('./clone/test.txt', 
+//     'Please add me to the test file..!!')
+//     .catch(err => {
+//         console.log(err)
+// })
 
 const clone = async tools => {
   await tools.exec("git", ["clone", '--single-branch', '-b', env.GIT_BRANCH, gitRepo, localPath])
