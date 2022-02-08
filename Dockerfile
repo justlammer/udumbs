@@ -4,5 +4,6 @@ FROM node:12
 # Furthermore, they recommend NOT setting it in the Dockerfile, which makes running locally difficult.
 # Thus we copy files to another directory and cd into it before running (regardless of the environment).
 COPY . /app/
+RUN ls -al /github/workspace
 
-ENTRYPOINT ["sh", "-c", "cd /app && npm install --production && npm start"]
+CMD ["sh", "-c", "cd /app && npm install --production && npm start"]
