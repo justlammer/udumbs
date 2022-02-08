@@ -2,6 +2,9 @@ const { Toolkit } = require("actions-toolkit")
 const { appendFile } = require("fs").promises
 const getRandomInt = require('./random')
 
+const localPath = `./clone`;
+const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GIT_HOST}/${env.GITHUB_REPOSITORY}`;
+
 const GITHUB_NAME = process.env.GITHUB_NAME
 const GITHUB_EMAIL = process.env.GITHUB_EMAIL
 const MIN_COMMITS = process.env.MIN_COMMITS
@@ -25,8 +28,12 @@ const appendREADME = async content => {
   await appendFile("./README.md", content)
 }
 
+const clone = async tools => {
+  await tools.exec("git", ["clone", '--single-branch', '-b', process.env.GIT_BRANCH, gitRepo, localPath])
+}
+
 const push = async tools => {
-  await tools.exec("git", ["push"])
+  await tools.exec("git", ["push", localPath, gitRepo, process.env.GIT_BRANCH,])
 }
 
 Toolkit.run(
@@ -34,6 +41,7 @@ Toolkit.run(
     const content = getContentFile()
     const message = getCommitMessage()
     try {
+      await clone(tools)
       await setGitUser(tools)
       for (let i = 0; i < commitsToMake; i += 1) {
         await appendREADME(content)
