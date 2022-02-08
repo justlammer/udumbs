@@ -1,3 +1,4 @@
+const autoParse = require('auto-parse')
 const { dotenv } = require("dotenv-extended")
 const { Toolkit } = require("actions-toolkit")
 const { appendFile } = require("fs").promises
