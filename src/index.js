@@ -38,7 +38,7 @@ const setGitUser = async tools => {
 
 const getCommitMessage = () => env.GITHUB_COMMIT_MESSAGE
 const commitFile = async (tools, message) => {
-  await tools.exec("git", ["add", "README.md"])
+  await tools.exec("git", ["add", localPath, "README.md"])
   await tools.exec("git", ["commit", "-m", message, content])
 }
 
@@ -46,7 +46,7 @@ const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
 
 const getContentFile = () => `Contribution ${new Date().toISOString()}`
 const appendREADME = async content => {
-  await appendFile("./README.md", content)
+  await appendFile(localPath, "README.md", content)
 }
 
 const clone = async tools => {
