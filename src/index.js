@@ -1,6 +1,9 @@
+const { dotenv } = require("dotenv-extended")
 const { Toolkit } = require("actions-toolkit")
 const { appendFile } = require("fs").promises
 const getRandomInt = require('./random')
+
+dotenv.load({errorOnMissing: true});
 
 const localPath = './clone';
 const gitRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@${process.env.GITHUB_HOST}/${process.env.GITHUB_REPOSITORY}`;
