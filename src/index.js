@@ -59,7 +59,7 @@ const appendDataToFile = async (path, data) => {
 }
 
 const appendREADME = async content => {
-  content += "\n&nbsp;\n";
+  content += "\n<br><br>\n";
   await appendDataToFile("./clone/README.md", content)
 }
 
