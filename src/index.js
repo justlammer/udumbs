@@ -2,8 +2,8 @@ const { Toolkit } = require("actions-toolkit")
 const { appendFile } = require("fs").promises
 const getRandomInt = require('./random')
 
-const localPath = `./clone`;
-const gitRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@${process.env.GIT_HOST}/${process.env.GITHUB_REPOSITORY}`;
+const localPath = './clone';
+const gitRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@${process.env.GITHUB_HOST}/${process.env.GITHUB_REPOSITORY}`;
 
 const GITHUB_NAME = process.env.GITHUB_NAME
 const GITHUB_EMAIL = process.env.GITHUB_EMAIL
