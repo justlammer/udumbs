@@ -39,8 +39,8 @@ const setGitUser = async tools => {
 
 const getCommitMessage = () => env.GITHUB_COMMIT_MESSAGE
 const commitFile = async (tools, message) => {
-  await tools.exec("git", ["add", "./clone/README.md"])
-  await tools.exec("git", ["commit", "-m", message, content])
+  await tools.exec("git", "-C", ["add", "/README.md"])
+  await tools.exec("git", "-C", ["commit", "-m", message, content])
 }
 
 const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
@@ -69,11 +69,12 @@ const appendREADME = async content => {
 // })
 
 const clone = async tools => {
-  await tools.exec("git", ["clone", '--single-branch', '-b', env.GIT_BRANCH, gitRepo, localPath])
+  await tools.exec("git", "-C", ["clone", '--single-branch', '-b', env.GIT_BRANCH, gitRepo, localPath])
 }
 
 const push = async tools => {
-  await tools.exec("git", ["push", localPath, gitRepo, env.GIT_BRANCH,])
+  // await tools.exec("git", ["push", localPath, gitRepo, env.GIT_BRANCH,])
+  await tools.exec("git", ["push"])
 }
 
 Toolkit.run(
