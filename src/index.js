@@ -7,21 +7,12 @@ const getRandomInt = require('./random')
 
 const env = autoParse({
   GIT_BRANCH: process.env.GIT_BRANCH || process.env.GITHUB_REF.replace(/^refs\/heads\//, ''),
-  ...dotenv.load({ defaults: '.env.defaults', schema: '.env.schema', errorOnMissing: true, includeProcessEnv: true}),
-  // ...dotenv.load({errorOnMissing: true, includeProcessEnv: true}),
-  // ...dotenv.load({
-  //   encoding: 'utf8',
-  //   silent: true,
-  //   path: '.env',
-  //   defaults: '.env.defaults',
-  //   schema: '.env.schema',
-  //   errorOnMissing: false,
-  //   errorOnExtra: false,
-  //   errorOnRegex: false,
-  //   includeProcessEnv: false,
-  //   assignToProcessEnv: true,
-  //   overrideProcessEnv: false
-  // }),
+  ...dotenv.load({ 
+    defaults: '.env.defaults',
+    schema: '.env.schema',
+    errorOnMissing: true,
+    includeProcessEnv: true
+  }),
 });
 
 const localPath = './clone';
