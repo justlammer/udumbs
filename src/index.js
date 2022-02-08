@@ -3,22 +3,27 @@ const { Toolkit } = require("actions-toolkit")
 const { appendFile } = require("fs").promises
 const getRandomInt = require('./random')
 
-dotenv.load({errorOnMissing: true});
+const dotenv = require('dotenv-extended').load();
+
+const env = autoParse({
+  GIT_BRANCH: process.env.GIT_BRANCH || process.env.GITHUB_REF.replace(/^refs\/heads\//, ''),
+  ...dotenv.load({errorOnMissing: true, includeProcessEnv: true}),
+});
 
 const localPath = './clone';
-const gitRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@${process.env.GITHUB_HOST}/${process.env.GITHUB_REPOSITORY}`;
+const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GITHUB_HOST}/${env.GITHUB_REPOSITORY}`;
 
-const GITHUB_NAME = process.env.GITHUB_NAME
-const GITHUB_EMAIL = process.env.GITHUB_EMAIL
-const MIN_COMMITS = process.env.MIN_COMMITS
-const MAX_COMMITS = process.env.MAX_COMMITS
+const GITHUB_NAME = env.GITHUB_NAME
+const GITHUB_EMAIL = env.GITHUB_EMAIL
+const MIN_COMMITS = env.MIN_COMMITS
+const MAX_COMMITS = env.MAX_COMMITS
 
 const setGitUser = async tools => {
   await tools.exec("git", ["config", "--global", "user.email", GITHUB_EMAIL])
   await tools.exec("git", ["config", "--global", "user.name", GITHUB_NAME])
 }
 
-const getCommitMessage = () => process.env.GIT_COMMIT_MESSAGE
+const getCommitMessage = () => env.GIT_COMMIT_MESSAGE
 const commitFile = async (tools, message) => {
   await tools.exec("git", ["add", "README.md"])
   await tools.exec("git", ["commit", "-m", message, content])
@@ -32,11 +37,11 @@ const appendREADME = async content => {
 }
 
 const clone = async tools => {
-  await tools.exec("git", ["clone", '--single-branch', '-b', process.env.GIT_BRANCH, gitRepo, localPath])
+  await tools.exec("git", ["clone", '--single-branch', '-b', env.GIT_BRANCH, gitRepo, localPath])
 }
 
 const push = async tools => {
-  await tools.exec("git", ["push", localPath, gitRepo, process.env.GIT_BRANCH,])
+  await tools.exec("git", ["push", localPath, gitRepo, env.GIT_BRANCH,])
 }
 
 Toolkit.run(
