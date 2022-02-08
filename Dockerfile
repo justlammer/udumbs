@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:14
 
 # When running as a GitHub Action, the WORKDIR is controlled by GitHub.
 # Furthermore, they recommend NOT setting it in the Dockerfile, which makes running locally difficult.
