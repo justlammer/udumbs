@@ -1,12 +1,12 @@
-const autoParse = require('auto-parse')
-const dotenv = require("dotenv-extended")
 const { Toolkit } = require("actions-toolkit")
 const { appendFile } = require("fs").promises
+const autoParse = require('auto-parse')
+const dotenv = require("dotenv-extended")
 const getRandomInt = require('./random')
 
 const env = autoParse({
   GIT_BRANCH: process.env.GIT_BRANCH || process.env.GITHUB_REF.replace(/^refs\/heads\//, ''),
-  ...dotenv.load({errorOnMissing: true, includeProcessEnv: true}),
+  ...dotenv.load({ defaults: '.env.defaults', schema: '.env.schema', errorOnMissing: true, includeProcessEnv: true}),
   // ...dotenv.load({errorOnMissing: true, includeProcessEnv: true}),
   // ...dotenv.load({
   //   encoding: 'utf8',
