@@ -1,9 +1,9 @@
-const { Toolkit } = require("actions-toolkit")
 // const { appendFile } = require("fs").promises
 const fs = require('fs')
 const autoParse = require('auto-parse')
 const dotenv = require("dotenv-extended")
 const getRandomInt = require('./random')
+const { Toolkit } = require("actions-toolkit")
 
 const env = autoParse({
   GIT_BRANCH: process.env.GIT_BRANCH || process.env.GITHUB_REF.replace(/^refs\/heads\//, ''),
