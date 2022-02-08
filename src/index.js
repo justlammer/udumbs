@@ -3,7 +3,7 @@ const { appendFile } = require("fs").promises
 const getRandomInt = require('./random')
 
 const localPath = `./clone`;
-const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GIT_HOST}/${env.GITHUB_REPOSITORY}`;
+const gitRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@${process.env.GIT_HOST}/${process.env.GITHUB_REPOSITORY}`;
 
 const GITHUB_NAME = process.env.GITHUB_NAME
 const GITHUB_EMAIL = process.env.GITHUB_EMAIL
