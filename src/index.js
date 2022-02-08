@@ -39,7 +39,7 @@ const setGitUser = async tools => {
 
 const getCommitMessage = () => `${env.GITHUB_COMMIT_MESSAGE} - ${new Date().toISOString()}`
 const commitFile = async (tools, message) => {
-  await tools.exec("git -C ./clone", ["add", "README.md"])
+  await tools.exec("git -C ./clone", ["add", "COMMITSLOG"])
   await tools.exec("git -C ./clone", ["commit", "-m", message])
 }
 
@@ -60,7 +60,7 @@ const appendDataToFile = async (path, data) => {
 
 const appendREADME = async content => {
   content += "\n<br>\n";
-  await appendDataToFile("./clone/README.md", content)
+  await appendDataToFile("./clone/COMMITSLOG", content)
 }
 
 // appendDataToFile('./clone/test.txt', 
