@@ -19,6 +19,6 @@
   "license": "MIT",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest",
-    "start": "node --experimental-modules --experimental-specifier-resolution=node /app/src"
+    "start": "node /app/src"
   }
 }
