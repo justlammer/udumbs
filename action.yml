@@ -1,0 +1,11 @@
+name: 'Artificial Grass'
+description: 'This action is intended to manipulate your Github Contribution Graph.'
+author: 'Gibran <gibransvarga@gmail.com>'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  icon: 'grid'
+  color: 'green'

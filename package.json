@@ -1,0 +1,24 @@
+{
+  "name": "artificial-grass",
+  "author": "Gibran <gibransvarga@gmail.com>",
+  "version": "1.0.0",
+  "description": "Manipulate github contribution graph",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/index.js",
+  "dependencies": {
+    "actions-toolkit": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.3",
+    "jest": "^26.0.1"
+  },
+  "keywords": [
+    "Github Contribution Graph"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest",
+    "start": "node --experimental-top-level-await --experimental-specifier-resolution=node src"
+  }
+}

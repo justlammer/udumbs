@@ -1,0 +1,23 @@
+name: Audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+  schedule:
+  - cron: '0 12 * * *'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - run: npm audit --production
+    
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: github/codeql-action/init@main
+    - uses: github/codeql-action/analyze@main
