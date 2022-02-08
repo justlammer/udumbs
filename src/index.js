@@ -39,7 +39,7 @@ const setGitUser = async tools => {
 
 const getCommitMessage = () => env.GITHUB_COMMIT_MESSAGE
 const commitFile = async (tools, message) => {
-  await tools.exec("git", ["add", localPath, "README.md"])
+  await tools.exec("git", ["add", "./clone/README.md"])
   await tools.exec("git", ["commit", "-m", message, content])
 }
 
