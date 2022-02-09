@@ -50,7 +50,7 @@ const filePath = ('./clone/COMMITSLOG.md')
 
 const deleteExistingFiles = async () => {
 
-  await fs.promises.accessaccess(filePath, (error) => {
+  await fs.promises.access(filePath, (error) => {
     //  if any error
     if (error) {
       console.log(error)
