@@ -16,10 +16,8 @@ const env = autoParse({
 
 const localPath = './clone';
 const logFile = 'COMMITSLOG.md';
-const msgRefference = 'Generated via https://github.com/marketplace/actions/artificial-grass';
-// const commitedLogFile = `${localPath}/'COMMITSLOG.md'`;
-const commitedLogFile = (`${localPath}/${logFile}`);
 const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GITHUB_HOST}/${env.GITHUB_REPOSITORY}`;
+const msgRefference = 'Generated via https://github.com/marketplace/actions/artificial-grass';
 
 const GITHUB_NAME = env.GITHUB_NAME
 const GITHUB_EMAIL = env.GITHUB_EMAIL
@@ -66,13 +64,14 @@ Toolkit.run(async (tools) => {
   
     const content = getContentFile()
     const message = getCommitMessage()
+    const commitedLogFile = (`${localPath}/${logFile}`);
 
     try {
       await gitClone(tools)
       await setGitUser(tools)
 
       if (fs.existsSync(commitedLogFile)) {
-        console.log('FILE EXISTS:', commitedLogFile)
+        console.log(`File exists: ${commitedLogFile}`)
         await tools.exec('rm', [ commitedLogFile ])
       }  else {
         console.log(`${commitedLogFile} does not exists`);
@@ -85,10 +84,10 @@ Toolkit.run(async (tools) => {
       
       await push(tools)
     } catch (err) {
-      tools.log.error('Something went wrong')
+      tools.log.error('Oops! Something went wrong')
       return tools.exit.failure(err)    
     }
-    tools.exit.success('Pushed to remote repository')
+    tools.exit.success('Successfully pushed to remote repository.')
   },
   {
     event: ['schedule', 'workflow_dispatch'], secrets: ['GITHUB_TOKEN']
