@@ -42,7 +42,7 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 // }
 
 const appendDataToFile = async (path, data) => {
-  await fs.promises.appendFile(path, data)
+  await fs.promises.writeFile(path, data)
   const buff = await fs.promises.readFile(path)
 
   const content = buff.toString()
