@@ -1,9 +1,7 @@
-// const { appendFile } = require('fs').promises
 const fs = require('fs')
 const autoParse = require('auto-parse')
 const dotenv = require('dotenv-extended')
 const getRandomInt = require('./random')
-// const path = require('path') 
 const { Toolkit } = require('actions-toolkit')
 
 const env = autoParse({
@@ -18,6 +16,8 @@ const env = autoParse({
 
 const localPath = './clone';
 const msgRefference = 'Generated via https://github.com/marketplace/actions/artificial-grass';
+// const commitedLogFile = `${localPath}/'COMMITSLOG.md'`;
+const commitedLogFile = (localPath} + '/COMMITSLOG.md');
 const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GITHUB_HOST}/${env.GITHUB_REPOSITORY}`;
 
 const GITHUB_NAME = env.GITHUB_NAME
@@ -30,10 +30,6 @@ const setGitUser = async tools => {
   await tools.exec('git', ['config', '--global', 'user.name', GITHUB_NAME])
 }
 
-// const deleteFiles = async tools => {
-//   await tools.exec('rm', [localPath + '/COMMITSLOG.md'])
-// }
-
 const getCommitMessage = () => `${env.GITHUB_COMMIT_MESSAGE} - ${new Date().toISOString()}`
 const commitFile = async (tools, message) => {
   await tools.exec('git', ['-C', localPath, 'add', 'COMMITSLOG.md'])
@@ -43,85 +39,6 @@ const commitFile = async (tools, message) => {
 const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
 
 const getContentFile = () => `Commits: ${new Date().toISOString()} - ${msgRefference}`
-// const appendCOMMITSLOG = async content => {
-//   await appendFile(localPath, 'README.md', content)
-// }
-
-// const filePath = './clone/COMMITSLOG.md';
-
-// const deleteExistingFiles = async () => {
-// // new chapter
-//   fs.access(filePath, fs.constants.F_OK, (err) => {
-//     console.log('\n> Checking if the file exists');
-   
-//     if (err) {
-//       console.log('File does not exist');
-//     }
-//     else {
-//       console.log('File does exist');
-//       fs.unlink(filePath);
-//     }
-//   });
-
-// // old
-//   // await fs.promises.access(filePath, fs.constants.F_OK, (error) => {
-//   //   //  if any error
-//   //   if (error) {
-//   //     console.log(error)
-//   //     return
-//   //   }
-
-//   //   console.log("File Exists!")
-//   // });
-
-//   // fs.access(filePath, fs.F_OK) => {
-//   //   if (F_OK) {
-//   //     console.log('File exists.');
-//   //     // return
-//   //   } else {
-//   //     console.log('File not found.');
-//   //   }
-
-//   // await path.existsSync(filePath, function(exists) { 
-//   //   if (exists) { 
-//   //     // do something
-//   //       console.log('File exists.');
-//   //   } else {
-//   //       console.log('File not found.');
-//   //   }
-//   // }); 
-  
-//   // if (fs.accessSync(localPath + '/COMMITSLOG.md')) {
-//   //   // path exists
-//   //   console.log("exists:", path);
-//   // } else {
-//   //   console.log("DOES NOT exist:", path);
-//   // } 
-//   // if (fs.accessSync(filePath)) {
-//   //   // path exists
-//   //   console.log("FILE EXISTS:", path);
-//   //   // await fs.promises.unlink(data);
-//   // } else {
-//   //   console.log("FILE DOES NOT EXISTS:", path);
-//   // } 
-
-//   // await fs.promises.stat(localPath + '/COMMITSLOG.md', async (exists) => {
-
-//   //   if(exists) {
-//   //       console.log('File exists.');
-//   //       // await fs.unlink(data);
-//   //       //await tools.exec('rm', (data))
-//   //       // await fs.promises.unlink(data);
-//   //   } else {
-//   //       console.log('File not found.');
-//   //   }
-
-//   // });
-// }
-
-// const deleteFiles = async () => {
-//   await deleteExistingFiles(localPath + '/COMMITSLOG.md')
-// }
 
 const appendDataToFile = async (path, data) => {
   await fs.promises.appendFile(path, data)
@@ -131,24 +48,16 @@ const appendDataToFile = async (path, data) => {
   console.log(`Content : ${content}`)
 }
 
-// const filePath = path.join(__dirname, '/pictures');
 const appendCOMMITSLOG = async content => {
   content += '\n<br>\n';
   await appendDataToFile(localPath + '/COMMITSLOG.md', content)
 }
-
-// appendDataToFile('./clone/test.txt', 
-//     'Please add me to the test file..!!')
-//     .catch(err => {
-//         console.log(err)
-// })
 
 const gitClone = async tools => {
   await tools.exec('git', ['clone', '--single-branch', '-b', env.GIT_BRANCH, gitRepo, localPath])
 }
 
 const push = async tools => {
-  // await tools.exec('git', ['push', localPath, gitRepo, env.GIT_BRANCH,])
   await tools.exec('git', [ '-C', localPath, 'push'])
 }
 
@@ -160,12 +69,12 @@ Toolkit.run(async (tools) => {
     try {
       await gitClone(tools)
       await setGitUser(tools)
-      // await deleteExistingFiles(tools)
 
       if (fs.existsSync(localPath + '/COMMITSLOG.md')) {
-        //file exists
-        console.log('FILE EXISTS')
+        console.log('FILE EXISTS:', commitedLogFile)
         await tools.exec('rm', [ localPath + '/COMMITSLOG.md' ])
+      }  else {
+        console.log(`${commitedLogFile} does not exists`);
       }
 
       for (let i = 0; i < commitsToMake; i += 1) {
