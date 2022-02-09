@@ -53,7 +53,7 @@ const deleteExistingFiles = async (data) => {
         console.log('File exists. Deleting now ...');
         // await fs.unlink(data);
         //await tools.exec('rm', (data))
-        await fs.unlinkSync(data);
+        await fs.promises.unlinkSync(data);
     } else {
         console.log('File not found, so not deleting.');
     }
@@ -62,7 +62,7 @@ const deleteExistingFiles = async (data) => {
 }
 
 const deleteFiles = async data => {
-  await deleteExistingFiles(localPath + '/COMMITSLOG.md', data)
+  await deleteExistingFiles(localPath + '/COMMITSLOG.md')
 }
 
 const appendDataToFile = async (path, data) => {
