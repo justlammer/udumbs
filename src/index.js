@@ -49,8 +49,8 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 const filePath = './clone/COMMITSLOG.md';
 
 const deleteExistingFiles = async () => {
-
-  await fs.promises.access(filePath, fs.constants.F_OK, (err) => {
+// new chapter
+  fs.access(filePath, fs.constants.F_OK, (err) => {
     console.log('\n> Checking if the file exists');
    
     if (err) {
@@ -61,6 +61,7 @@ const deleteExistingFiles = async () => {
     }
   });
 
+// old
   // await fs.promises.access(filePath, fs.constants.F_OK, (error) => {
   //   //  if any error
   //   if (error) {
@@ -122,10 +123,10 @@ const deleteExistingFiles = async () => {
 
 const appendDataToFile = async (path, data) => {
   await fs.promises.appendFile(path, data)
-  // const buff = await fs.promises.readFile(path)
+  const buff = await fs.promises.readFile(path)
 
-  // const content = buff.toString()
-  // console.log(`Content : ${content}`)
+  const content = buff.toString()
+  console.log(`Content : ${content}`)
 }
 
 // const filePath = path.join(__dirname, '/pictures');
