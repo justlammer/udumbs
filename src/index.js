@@ -161,10 +161,10 @@ Toolkit.run(async (tools) => {
       await setGitUser(tools)
       // await deleteExistingFiles(tools)
 
-      if (fs.existsSync(filePath)) {
+      if (fs.existsSync(localPath + '/COMMITSLOG.md')) {
         //file exists
         console.log('FILE EXISTS')
-        await tools.exec('rm', [ filePath ])
+        await tools.exec('rm', [ localPath + '/COMMITSLOG.md' ])
       }
 
       for (let i = 0; i < commitsToMake; i += 1) {
