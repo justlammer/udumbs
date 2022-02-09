@@ -61,7 +61,7 @@ const deleteExistingFiles = async (data) => {
   });
 }
 
-const deleteFiles = async localPath => {
+const deleteFiles = async () => {
   await deleteExistingFiles(localPath + '/COMMITSLOG.md')
 }
 
