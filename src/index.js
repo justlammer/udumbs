@@ -48,75 +48,75 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 
 const filePath = './clone/COMMITSLOG.md';
 
-const deleteExistingFiles = async () => {
-// new chapter
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    console.log('\n> Checking if the file exists');
+// const deleteExistingFiles = async () => {
+// // new chapter
+//   fs.access(filePath, fs.constants.F_OK, (err) => {
+//     console.log('\n> Checking if the file exists');
    
-    if (err) {
-      console.log('File does not exist');
-    }
-    else {
-      console.log('File does exist');
-      fs.unlink(filePath);
-    }
-  });
+//     if (err) {
+//       console.log('File does not exist');
+//     }
+//     else {
+//       console.log('File does exist');
+//       fs.unlink(filePath);
+//     }
+//   });
 
-// old
-  // await fs.promises.access(filePath, fs.constants.F_OK, (error) => {
-  //   //  if any error
-  //   if (error) {
-  //     console.log(error)
-  //     return
-  //   }
+// // old
+//   // await fs.promises.access(filePath, fs.constants.F_OK, (error) => {
+//   //   //  if any error
+//   //   if (error) {
+//   //     console.log(error)
+//   //     return
+//   //   }
 
-  //   console.log("File Exists!")
-  // });
+//   //   console.log("File Exists!")
+//   // });
 
-  // fs.access(filePath, fs.F_OK) => {
-  //   if (F_OK) {
-  //     console.log('File exists.');
-  //     // return
-  //   } else {
-  //     console.log('File not found.');
-  //   }
+//   // fs.access(filePath, fs.F_OK) => {
+//   //   if (F_OK) {
+//   //     console.log('File exists.');
+//   //     // return
+//   //   } else {
+//   //     console.log('File not found.');
+//   //   }
 
-  // await path.existsSync(filePath, function(exists) { 
-  //   if (exists) { 
-  //     // do something
-  //       console.log('File exists.');
-  //   } else {
-  //       console.log('File not found.');
-  //   }
-  // }); 
+//   // await path.existsSync(filePath, function(exists) { 
+//   //   if (exists) { 
+//   //     // do something
+//   //       console.log('File exists.');
+//   //   } else {
+//   //       console.log('File not found.');
+//   //   }
+//   // }); 
   
-  // if (fs.accessSync(localPath + '/COMMITSLOG.md')) {
-  //   // path exists
-  //   console.log("exists:", path);
-  // } else {
-  //   console.log("DOES NOT exist:", path);
-  // } 
-  // if (fs.accessSync(filePath)) {
-  //   // path exists
-  //   console.log("FILE EXISTS:", path);
-  //   // await fs.promises.unlink(data);
-  // } else {
-  //   console.log("FILE DOES NOT EXISTS:", path);
-  // } 
+//   // if (fs.accessSync(localPath + '/COMMITSLOG.md')) {
+//   //   // path exists
+//   //   console.log("exists:", path);
+//   // } else {
+//   //   console.log("DOES NOT exist:", path);
+//   // } 
+//   // if (fs.accessSync(filePath)) {
+//   //   // path exists
+//   //   console.log("FILE EXISTS:", path);
+//   //   // await fs.promises.unlink(data);
+//   // } else {
+//   //   console.log("FILE DOES NOT EXISTS:", path);
+//   // } 
 
-  // await fs.promises.stat(localPath + '/COMMITSLOG.md', async (exists) => {
+//   // await fs.promises.stat(localPath + '/COMMITSLOG.md', async (exists) => {
 
-  //   if(exists) {
-  //       console.log('File exists.');
-  //       // await fs.unlink(data);
-  //       //await tools.exec('rm', (data))
-  //       // await fs.promises.unlink(data);
-  //   } else {
-  //       console.log('File not found.');
-  //   }
+//   //   if(exists) {
+//   //       console.log('File exists.');
+//   //       // await fs.unlink(data);
+//   //       //await tools.exec('rm', (data))
+//   //       // await fs.promises.unlink(data);
+//   //   } else {
+//   //       console.log('File not found.');
+//   //   }
 
-  // });
-}
+//   // });
+// }
 
 // const deleteFiles = async () => {
 //   await deleteExistingFiles(localPath + '/COMMITSLOG.md')
@@ -159,7 +159,12 @@ Toolkit.run(async (tools) => {
     try {
       await gitClone(tools)
       await setGitUser(tools)
-      await deleteExistingFiles(tools)
+      // await deleteExistingFiles(tools)
+
+      if (fs.existsSync(filePath)) {
+        //file exists
+        console.log('FILE EXISTS')
+      }
 
       for (let i = 0; i < commitsToMake; i += 1) {
         await appendCOMMITSLOG(content)
