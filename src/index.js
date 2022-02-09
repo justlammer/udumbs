@@ -28,9 +28,9 @@ const setGitUser = async tools => {
   await tools.exec('git', ['config', '--global', 'user.name', GITHUB_NAME])
 }
 
-const deleteFiles = async tools => {
-  await tools.exec('rm', [localPath + '/COMMITSLOG.md'])
-}
+// const deleteFiles = async tools => {
+//   await tools.exec('rm', [localPath + '/COMMITSLOG.md'])
+// }
 
 const getCommitMessage = () => `${env.GITHUB_COMMIT_MESSAGE} - ${new Date().toISOString()}`
 const commitFile = async (tools, message) => {
@@ -82,7 +82,7 @@ Toolkit.run(async (tools) => {
     try {
       await gitClone(tools)
       await setGitUser(tools)
-      await deleteFiles(tools)
+      // await deleteFiles(tools)
 
       for (let i = 0; i < commitsToMake; i += 1) {
         await appendCOMMITSLOG(content)
