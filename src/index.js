@@ -48,15 +48,21 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 
 const deleteExistingFiles = async () => {
 
-  await path.existsSync(localPath + '/COMMITSLOG.md', function(exists) { 
-    if (exists) { 
-      // do something
-        console.log('File exists.');
-    } else {
-        console.log('File not found.');
-    }
-  }); 
+  // await path.existsSync(localPath + '/COMMITSLOG.md', function(exists) { 
+  //   if (exists) { 
+  //     // do something
+  //       console.log('File exists.');
+  //   } else {
+  //       console.log('File not found.');
+  //   }
+  // }); 
   
+  if (fs.existsSync(localPath + '/COMMITSLOG.md')) {
+    // path exists
+    console.log("exists:", path);
+  } else {
+    console.log("DOES NOT exist:", path);
+  } 
 
   // await fs.promises.stat(localPath + '/COMMITSLOG.md', async (exists) => {
 
