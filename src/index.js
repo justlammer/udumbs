@@ -1,9 +1,9 @@
-// const { appendFile } = require("fs").promises
+// const { appendFile } = require('fs').promises
 const fs = require('fs')
 const autoParse = require('auto-parse')
-const dotenv = require("dotenv-extended")
+const dotenv = require('dotenv-extended')
 const getRandomInt = require('./random')
-const { Toolkit } = require("actions-toolkit")
+const { Toolkit } = require('actions-toolkit')
 
 const env = autoParse({
   GIT_BRANCH: process.env.GIT_BRANCH || process.env.GITHUB_REF.replace(/^refs\/heads\//, ''),
@@ -24,21 +24,21 @@ const MIN_COMMITS = env.MIN_COMMITS
 const MAX_COMMITS = env.MAX_COMMITS
 
 const setGitUser = async tools => {
-  await tools.exec("git", ["config", "--global", "user.email", GITHUB_EMAIL])
-  await tools.exec("git", ["config", "--global", "user.name", GITHUB_NAME])
+  await tools.exec('git', ['config', '--global', 'user.email', GITHUB_EMAIL])
+  await tools.exec('git', ['config', '--global', 'user.name', GITHUB_NAME])
 }
 
 const getCommitMessage = () => `${env.GITHUB_COMMIT_MESSAGE} - ${new Date().toISOString()}`
 const commitFile = async (tools, message) => {
-  await tools.exec("git -C ./clone", ["add", "COMMITSLOG.md"])
-  await tools.exec("git -C ./clone", ["commit", "-m", message])
+  await tools.exec('git -C ./clone', ['add', 'COMMITSLOG.md'])
+  await tools.exec('git -C ./clone', ['commit', '-m', message])
 }
 
 const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
 
 const getContentFile = () => `Commits: ${new Date().toISOString()}`
 // const appendREADME = async content => {
-//   await appendFile(localPath, "README.md", content)
+//   await appendFile(localPath, 'README.md', content)
 // }
 
 const appendDataToFile = async (path, data) => {
@@ -50,8 +50,8 @@ const appendDataToFile = async (path, data) => {
 }
 
 const appendREADME = async content => {
-  content += "\n<br>\n";
-  await appendDataToFile("./clone/COMMITSLOG.md", content)
+  content += '\n<br>\n';
+  await appendDataToFile('./clone/COMMITSLOG.md', content)
 }
 
 // appendDataToFile('./clone/test.txt', 
@@ -61,34 +61,36 @@ const appendREADME = async content => {
 // })
 
 const clone = async tools => {
-  await tools.exec("git", ["clone", '--single-branch', '-b', env.GIT_BRANCH, gitRepo, localPath])
+  await tools.exec('git', ['clone', '--single-branch', '-b', env.GIT_BRANCH, gitRepo, localPath])
 }
 
 const push = async tools => {
-  // await tools.exec("git", ["push", localPath, gitRepo, env.GIT_BRANCH,])
-  await tools.exec("git -C ./clone", ["push"])
+  // await tools.exec('git', ['push', localPath, gitRepo, env.GIT_BRANCH,])
+  await tools.exec('git -C ./clone', ['push'])
 }
 
-Toolkit.run(
-  async (tools) => {
+Toolkit.run(async (tools) => {
+  
     const content = getContentFile()
     const message = getCommitMessage()
+
     try {
       await clone(tools)
       await setGitUser(tools)
+
       for (let i = 0; i < commitsToMake; i += 1) {
         await appendREADME(content)
         await commitFile(tools, message)
       }
+      
       await push(tools)
     } catch (err) {
-      tools.log.error("Something went wrong")
-      return tools.exit.failure(err)
+      tools.log.error('Something went wrong')
+      return tools.exit.failure(err)    
     }
-    tools.exit.success("Pushed to remote repository")
+    tools.exit.success('Pushed to remote repository')
   },
   {
-    event: ["schedule", "workflow_dispatch"],
-    secrets: ["GITHUB_TOKEN"],
+    event: ['schedule', 'workflow_dispatch'], secrets: ['GITHUB_TOKEN']
   }
 )
