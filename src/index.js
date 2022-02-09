@@ -64,7 +64,7 @@ const deleteExistingFiles = async () => {
   //   console.log("DOES NOT exist:", path);
   // } 
   const filePath = ('./clone/COMMITSLOG.md')
-  if (fs.accessSync(filePath)) {
+  if (fs.access(filePath)) {
     // path exists
     console.log("FILE EXISTS:", path);
     // await fs.promises.unlink(data);
