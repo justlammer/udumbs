@@ -3,7 +3,7 @@ const fs = require('fs')
 const autoParse = require('auto-parse')
 const dotenv = require('dotenv-extended')
 const getRandomInt = require('./random')
-const path = require('path') 
+// const path = require('path') 
 const { Toolkit } = require('actions-toolkit')
 
 const env = autoParse({
@@ -50,14 +50,14 @@ const filePath = ('./clone/COMMITSLOG.md')
 
 const deleteExistingFiles = async () => {
 
-  // await path.existsSync(localPath + '/COMMITSLOG.md', function(exists) { 
-  //   if (exists) { 
-  //     // do something
-  //       console.log('File exists.');
-  //   } else {
-  //       console.log('File not found.');
-  //   }
-  // }); 
+  await path.existsSync(filePath, function(exists) { 
+    if (exists) { 
+      // do something
+        console.log('File exists.');
+    } else {
+        console.log('File not found.');
+    }
+  }); 
   
   // if (fs.accessSync(localPath + '/COMMITSLOG.md')) {
   //   // path exists
@@ -65,13 +65,13 @@ const deleteExistingFiles = async () => {
   // } else {
   //   console.log("DOES NOT exist:", path);
   // } 
-  if (fs.accessSync(filePath)) {
-    // path exists
-    console.log("FILE EXISTS:", path);
-    // await fs.promises.unlink(data);
-  } else {
-    console.log("FILE DOES NOT EXISTS:", path);
-  } 
+  // if (fs.accessSync(filePath)) {
+  //   // path exists
+  //   console.log("FILE EXISTS:", path);
+  //   // await fs.promises.unlink(data);
+  // } else {
+  //   console.log("FILE DOES NOT EXISTS:", path);
+  // } 
 
   // await fs.promises.stat(localPath + '/COMMITSLOG.md', async (exists) => {
 
