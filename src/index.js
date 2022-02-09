@@ -47,10 +47,10 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 
 const appendDataToFile = async (path, data) => {
   await fs.promises.appendFile(path, data)
-  // const buff = await fs.promises.readFile(path)
+  const buff = await fs.promises.readFile(path)
+  const content = buff.toString()
 
-  // const content = buff.toString()
-  // console.log(`Content : ${content}`)
+  console.log(`Content : ${content}`)
 }
 
 // const filePath = path.join(__dirname, '/pictures');
