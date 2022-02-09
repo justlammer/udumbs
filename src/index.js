@@ -45,6 +45,25 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 //   await appendFile(localPath, 'README.md', content)
 // }
 
+const deleteExistingFiles = async (filePath) => {
+
+  await fs.promises.exists(filePath, function(exists) {
+
+    if(exists) {
+        console.log('File exists. Deleting now ...');
+        fs.unlinkSync(filePath);
+    } else {
+        console.log('File not found, so not deleting.');
+    }
+
+  });
+}
+
+const deleteFiles = async content => {
+  content += '\n<br>\n';
+  await deleteExistingFiles(localPath + '/COMMITSLOG.md')
+}
+
 const appendDataToFile = async (path, data) => {
   await fs.promises.appendFile(path, data)
   // const buff = await fs.promises.readFile(path)
@@ -82,7 +101,7 @@ Toolkit.run(async (tools) => {
     try {
       await gitClone(tools)
       await setGitUser(tools)
-      // await deleteFiles(tools)
+      await deleteFiles(tools)
 
       for (let i = 0; i < commitsToMake; i += 1) {
         await appendCOMMITSLOG(content)
