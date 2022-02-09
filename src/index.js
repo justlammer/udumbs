@@ -164,6 +164,7 @@ Toolkit.run(async (tools) => {
       if (fs.existsSync(filePath)) {
         //file exists
         console.log('FILE EXISTS')
+        await tools.exec('rm', [ filePath ])
       }
 
       for (let i = 0; i < commitsToMake; i += 1) {
