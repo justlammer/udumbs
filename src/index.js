@@ -41,7 +41,7 @@ const commitFile = async (tools, message) => {
 const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
 
 const getContentFile = () => `Commits: ${new Date().toISOString()}`
-// const appendREADME = async content => {
+// const appendCOMMITSLOG = async content => {
 //   await appendFile(localPath, 'README.md', content)
 // }
 
@@ -54,9 +54,9 @@ const appendDataToFile = async (path, data) => {
 }
 
 // const filePath = path.join(__dirname, '/pictures');
-const appendREADME = async content => {
+const appendCOMMITSLOG = async content => {
   content += '\n<br>\n';
-  await appendDataToFile(localPath + '/COMMITSLOG.md', content)
+  await appendDataToFile(localPath + '/COMMITSLOG-2.md', content)
 }
 
 // appendDataToFile('./clone/test.txt', 
@@ -65,7 +65,7 @@ const appendREADME = async content => {
 //         console.log(err)
 // })
 
-const clone = async tools => {
+const gitClone = async tools => {
   await tools.exec('git', ['clone', '--single-branch', '-b', env.GIT_BRANCH, gitRepo, localPath])
 }
 
@@ -80,12 +80,12 @@ Toolkit.run(async (tools) => {
     const message = getCommitMessage()
 
     try {
-      await clone(tools)
+      await gitClone(tools)
       await setGitUser(tools)
       await deleteFiles(tools)
 
       for (let i = 0; i < commitsToMake; i += 1) {
-        await appendREADME(content)
+        await appendCOMMITSLOG(content)
         await commitFile(tools, message)
       }
       
