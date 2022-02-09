@@ -57,7 +57,7 @@ const deleteExistingFiles = async () => {
   //   }
   // }); 
   
-  if (fs.existsSync(localPath + '/COMMITSLOG.md')) {
+  if (fs.accessSync(localPath + '/COMMITSLOG.md')) {
     // path exists
     console.log("exists:", path);
   } else {
