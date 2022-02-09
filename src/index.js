@@ -15,9 +15,10 @@ const env = autoParse({
 });
 
 const localPath = './clone';
+const logFile = 'COMMITSLOG.md';
 const msgRefference = 'Generated via https://github.com/marketplace/actions/artificial-grass';
 // const commitedLogFile = `${localPath}/'COMMITSLOG.md'`;
-const commitedLogFile = (localPath + '/COMMITSLOG.md');
+const commitedLogFile = (`${localPath}/${logFile}`);
 const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GITHUB_HOST}/${env.GITHUB_REPOSITORY}`;
 
 const GITHUB_NAME = env.GITHUB_NAME
@@ -32,7 +33,7 @@ const setGitUser = async tools => {
 
 const getCommitMessage = () => `${env.GITHUB_COMMIT_MESSAGE} - ${new Date().toISOString()}`
 const commitFile = async (tools, message) => {
-  await tools.exec('git', ['-C', localPath, 'add', 'COMMITSLOG.md'])
+  await tools.exec('git', ['-C', localPath, 'add', logFile])
   await tools.exec('git', ['-C', localPath, 'commit', '-m', message])
 }
 
@@ -50,7 +51,7 @@ const appendDataToFile = async (path, data) => {
 
 const appendCOMMITSLOG = async content => {
   content += '\n<br>\n';
-  await appendDataToFile(localPath + '/COMMITSLOG.md', content)
+  await appendDataToFile(commitedLogFile, content)
 }
 
 const gitClone = async tools => {
@@ -70,9 +71,9 @@ Toolkit.run(async (tools) => {
       await gitClone(tools)
       await setGitUser(tools)
 
-      if (fs.existsSync(localPath + '/COMMITSLOG.md')) {
+      if (fs.existsSync(commitedLogFile)) {
         console.log('FILE EXISTS:', commitedLogFile)
-        await tools.exec('rm', [ localPath + '/COMMITSLOG.md' ])
+        await tools.exec('rm', [ commitedLogFile ])
       }  else {
         console.log(`${commitedLogFile} does not exists`);
       }
