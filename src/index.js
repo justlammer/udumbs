@@ -63,7 +63,7 @@ const deleteExistingFiles = async () => {
   // } else {
   //   console.log("DOES NOT exist:", path);
   // } 
-  const filePath = (localPath + '/COMMITSLOG.md')
+  const filePath = (`${localPath}/COMMITSLOG.md`)
   if (fs.accessSync(filePath)) {
     // path exists
     console.log("FILE EXISTS:", path);
