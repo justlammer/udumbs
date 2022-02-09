@@ -53,7 +53,7 @@ const deleteExistingFiles = async (data) => {
         console.log('File exists. Deleting now ...');
         // await fs.unlink(data);
         //await tools.exec('rm', (data))
-        await fs.promises.unlinkSync(data);
+        await fs.promises.unlink(data);
     } else {
         console.log('File not found, so not deleting.');
     }
