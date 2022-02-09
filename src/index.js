@@ -49,9 +49,10 @@ const appendDataToFile = async (path, data) => {
   console.log(`Content : ${content}`)
 }
 
+// const filePath = path.join(__dirname, '/pictures');
 const appendREADME = async content => {
   content += '\n<br>\n';
-  await appendDataToFile('./clone/COMMITSLOG.md', content)
+  await appendDataToFile(localPath + '/COMMITSLOG.md', content)
 }
 
 // appendDataToFile('./clone/test.txt', 
