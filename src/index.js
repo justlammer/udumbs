@@ -30,8 +30,8 @@ const setGitUser = async tools => {
 
 const getCommitMessage = () => `${env.GITHUB_COMMIT_MESSAGE} - ${new Date().toISOString()}`
 const commitFile = async (tools, message) => {
-  await tools.exec('git -C ./clone', ['add', 'COMMITSLOG.md'])
-  await tools.exec('git -C ./clone', ['commit', '-m', message])
+  await tools.exec('git', ['-C', localPath, 'add', 'COMMITSLOG.md'])
+  await tools.exec('git', ['-C', localPath, 'commit', '-m', message])
 }
 
 const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
@@ -66,7 +66,7 @@ const clone = async tools => {
 
 const push = async tools => {
   // await tools.exec('git', ['push', localPath, gitRepo, env.GIT_BRANCH,])
-  await tools.exec('git -C ./clone', ['push'])
+  await tools.exec('git', [ '-C', localPath, 'push'])
 }
 
 Toolkit.run(async (tools) => {
