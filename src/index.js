@@ -46,6 +46,8 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 //   await appendFile(localPath, 'README.md', content)
 // }
 
+const filePath = ('./clone/COMMITSLOG.md')
+
 const deleteExistingFiles = async () => {
 
   // await path.existsSync(localPath + '/COMMITSLOG.md', function(exists) { 
@@ -63,7 +65,6 @@ const deleteExistingFiles = async () => {
   // } else {
   //   console.log("DOES NOT exist:", path);
   // } 
-  const filePath = ('./clone/COMMITSLOG.md')
   if (fs.accessSync(filePath)) {
     // path exists
     console.log("FILE EXISTS:", path);
