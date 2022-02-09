@@ -17,6 +17,7 @@ const env = autoParse({
 });
 
 const localPath = './clone';
+const msgRefference = 'Generated via https://github.com/marketplace/actions/artificial-grass';
 const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GITHUB_HOST}/${env.GITHUB_REPOSITORY}`;
 
 const GITHUB_NAME = env.GITHUB_NAME
@@ -41,12 +42,12 @@ const commitFile = async (tools, message) => {
 
 const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
 
-const getContentFile = () => `Commits: ${new Date().toISOString()}`
+const getContentFile = () => `Commits: ${new Date().toISOString()} - ${msgRefference}`
 // const appendCOMMITSLOG = async content => {
 //   await appendFile(localPath, 'README.md', content)
 // }
 
-const filePath = './clone/COMMITSLOG.md';
+// const filePath = './clone/COMMITSLOG.md';
 
 // const deleteExistingFiles = async () => {
 // // new chapter
