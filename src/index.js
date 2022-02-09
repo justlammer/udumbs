@@ -45,13 +45,13 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 //   await appendFile(localPath, 'README.md', content)
 // }
 
-const deleteExistingFiles = async (path, data) => {
+const deleteExistingFiles = async (data) => {
 
-  await fs.stat(path, data, function(exists) {
+  await fs.stat(data, function(exists) {
 
     if(exists) {
         console.log('File exists. Deleting now ...');
-        fs.unlinkSync(path, data);
+        fs.unlinkSync(data);
     } else {
         console.log('File not found, so not deleting.');
     }
