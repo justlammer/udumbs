@@ -46,19 +46,30 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 //   await appendFile(localPath, 'README.md', content)
 // }
 
-const filePath = ('./clone/COMMITSLOG.md')
+const filePath = './clone/COMMITSLOG.md';
 
 const deleteExistingFiles = async () => {
 
-  await fs.promises.access(filePath, (error) => {
-    //  if any error
-    if (error) {
-      console.log(error)
-      return
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    console.log('\n> Checking if the file exists');
+   
+    if (err) {
+      console.error('File does not exist');
     }
-
-    console.log("File Exists!")
+    else {
+      console.log('File does exist');   
+    }
   });
+
+  // await fs.promises.access(filePath, fs.constants.F_OK, (error) => {
+  //   //  if any error
+  //   if (error) {
+  //     console.log(error)
+  //     return
+  //   }
+
+  //   console.log("File Exists!")
+  // });
 
   // fs.access(filePath, fs.F_OK) => {
   //   if (F_OK) {
