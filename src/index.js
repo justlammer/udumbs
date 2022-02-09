@@ -50,14 +50,32 @@ const filePath = ('./clone/COMMITSLOG.md')
 
 const deleteExistingFiles = async () => {
 
-  await path.existsSync(filePath, function(exists) { 
-    if (exists) { 
-      // do something
-        console.log('File exists.');
-    } else {
-        console.log('File not found.');
+  fs.access(filePath, (error) => {
+    //  if any error
+    if (error) {
+      console.log(error);
+      return;
     }
-  }); 
+  
+    console.log("File Exists!");
+  });
+
+  // fs.access(filePath, fs.F_OK) => {
+  //   if (F_OK) {
+  //     console.log('File exists.');
+  //     // return
+  //   } else {
+  //     console.log('File not found.');
+  //   }
+
+  // await path.existsSync(filePath, function(exists) { 
+  //   if (exists) { 
+  //     // do something
+  //       console.log('File exists.');
+  //   } else {
+  //       console.log('File not found.');
+  //   }
+  // }); 
   
   // if (fs.accessSync(localPath + '/COMMITSLOG.md')) {
   //   // path exists
