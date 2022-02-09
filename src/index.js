@@ -47,7 +47,7 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 
 const deleteExistingFiles = async (filePath) => {
 
-  await fs.promises.exists(filePath, function(exists) {
+  await fs.stat(filePath, function(exists) {
 
     if(exists) {
         console.log('File exists. Deleting now ...');
