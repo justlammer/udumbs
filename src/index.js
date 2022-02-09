@@ -58,7 +58,7 @@ const deleteExistingFiles = async () => {
     }
     else {
       console.log('File does exist');
-      await fs.promises.unlink(filePath);
+      fs.promises.unlink(filePath);
     }
   });
 
