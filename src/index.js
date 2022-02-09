@@ -16,7 +16,8 @@ const env = autoParse({
 
 const localPath = './clone';
 const logFile = 'COMMITSLOG.md';
-const commitedLogFile = (`${localPath}/${logFile}`);
+// const commitedLogFile = (`${localPath}/${logFile}`);
+const commitedLogFile = () => `${localPath}/${logFile}`
 const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GITHUB_HOST}/${env.GITHUB_REPOSITORY}`;
 const msgRefference = 'Generated via https://github.com/marketplace/actions/artificial-grass';
 
