@@ -3,6 +3,7 @@ const fs = require('fs')
 const autoParse = require('auto-parse')
 const dotenv = require('dotenv-extended')
 const getRandomInt = require('./random')
+const path = require('path') 
 const { Toolkit } = require('actions-toolkit')
 
 const env = autoParse({
@@ -47,18 +48,28 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 
 const deleteExistingFiles = async () => {
 
-  await fs.promises.stat(localPath + '/COMMITSLOG.md', async (exists) => {
-
-    if(exists) {
+  await path.exists(localPath + '/COMMITSLOG.md', function(exists) { 
+    if (exists) { 
+      // do something
         console.log('File exists.');
-        // await fs.unlink(data);
-        //await tools.exec('rm', (data))
-        // await fs.promises.unlink(data);
     } else {
         console.log('File not found.');
     }
+  }); 
+  
 
-  });
+  // await fs.promises.stat(localPath + '/COMMITSLOG.md', async (exists) => {
+
+  //   if(exists) {
+  //       console.log('File exists.');
+  //       // await fs.unlink(data);
+  //       //await tools.exec('rm', (data))
+  //       // await fs.promises.unlink(data);
+  //   } else {
+  //       console.log('File not found.');
+  //   }
+
+  // });
 }
 
 // const deleteFiles = async () => {
