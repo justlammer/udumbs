@@ -16,6 +16,7 @@ const env = autoParse({
 
 const localPath = './clone';
 const logFile = 'COMMITSLOG.md';
+const commitedLogFile = (`${localPath}/${logFile}`);
 const gitRepo = `https://${env.GITHUB_ACTOR}:${env.GITHUB_TOKEN}@${env.GITHUB_HOST}/${env.GITHUB_REPOSITORY}`;
 const msgRefference = 'Generated via https://github.com/marketplace/actions/artificial-grass';
 
@@ -64,17 +65,17 @@ Toolkit.run(async (tools) => {
   
     const content = getContentFile()
     const message = getCommitMessage()
-    const commitedLogFile = (`${localPath}/${logFile}`);
+    const logFile = commitedLogFile()
 
     try {
       await gitClone(tools)
       await setGitUser(tools)
 
-      if (fs.existsSync(commitedLogFile)) {
-        console.log(`File exists: ${commitedLogFile}`)
-        await tools.exec('rm', [ commitedLogFile ])
+      if (fs.existsSync(logFile)) {
+        console.log(`File exists: ${logFile}`)
+        await tools.exec('rm', [ logFile ])
       }  else {
-        console.log(`${commitedLogFile} does not exists`);
+        console.log(`${logFile} does not exists`);
       }
 
       for (let i = 0; i < commitsToMake; i += 1) {
