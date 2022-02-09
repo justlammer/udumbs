@@ -57,11 +57,19 @@ const deleteExistingFiles = async () => {
   //   }
   // }); 
   
-  if (fs.accessSync(localPath + '/COMMITSLOG.md')) {
+  // if (fs.accessSync(localPath + '/COMMITSLOG.md')) {
+  //   // path exists
+  //   console.log("exists:", path);
+  // } else {
+  //   console.log("DOES NOT exist:", path);
+  // } 
+  const filePath = (localPath + '/COMMITSLOG.md');
+  if (fs.accessSync(filePath)) {
     // path exists
-    console.log("exists:", path);
+    console.log("FILE EXISTS:", path);
+    // await fs.promises.unlink(data);
   } else {
-    console.log("DOES NOT exist:", path);
+    console.log("FILE DOES NOT EXISTS:", path);
   } 
 
   // await fs.promises.stat(localPath + '/COMMITSLOG.md', async (exists) => {
