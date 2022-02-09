@@ -47,12 +47,12 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 
 const deleteExistingFiles = async (data) => {
 
-  await fs.stat(data, (exists) => {
+  await fs.stat(data, async (exists) => {
 
     if(exists) {
         console.log('File exists. Deleting now ...');
-        // fs.unlinkSync(data);
-        await tools.exec('rm', (data))
+        await fs.unlink(data);
+        //await tools.exec('rm', (data))
     } else {
         console.log('File not found, so not deleting.');
     }
