@@ -51,7 +51,8 @@ const deleteExistingFiles = async (data) => {
 
     if(exists) {
         console.log('File exists. Deleting now ...');
-        fs.unlinkSync(data);
+        // fs.unlinkSync(data);
+        await tools.exec('rm', (data))
     } else {
         console.log('File not found, so not deleting.');
     }
