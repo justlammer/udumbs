@@ -47,16 +47,16 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 
 const appendDataToFile = async (path, data) => {
   await fs.promises.appendFile(path, data)
-  const buff = await fs.promises.readFile(path)
-  const content = buff.toString()
+  // const buff = await fs.promises.readFile(path)
 
-  console.log(`Content : ${content}`)
+  // const content = buff.toString()
+  // console.log(`Content : ${content}`)
 }
 
 // const filePath = path.join(__dirname, '/pictures');
 const appendCOMMITSLOG = async content => {
   content += '\n<br>\n';
-  await appendDataToFile(localPath + '/COMMITSLOG-2.md', content)
+  await appendDataToFile(localPath + '/COMMITSLOG.md', content)
 }
 
 // appendDataToFile('./clone/test.txt', 
