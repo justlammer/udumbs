@@ -46,11 +46,11 @@ const getContentFile = () => `Commits: ${new Date().toISOString()}`
 //   await appendFile(localPath, 'README.md', content)
 // }
 
-const filePath = './clone/COMMITSLOG.md';
+// const filePath = './clone/COMMITSLOG.md';
 
 const deleteExistingFiles = async () => {
 // new chapter
-  fs.access(filePath, fs.constants.F_OK, (err) => {
+  fs.access(localPath + '/COMMITSLOG.md', fs.constants.F_OK, (err) => {
     console.log('\n> Checking if the file exists');
    
     if (err) {
