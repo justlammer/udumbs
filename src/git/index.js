@@ -1,10 +1,10 @@
 const { appendDataToFile } = require("../appendfiles");
 const { commitedLogFile } = require("../index");
-const { localPath, logFile } = require("./index");
-const { env } = require("./index");
-const { env, gitRepo, localPath } = require("./index");
-const { localPath } = require("./index");
-const { GITHUB_EMAIL, GITHUB_NAME } = require("./index");
+const { localPath, logFile } = require("../index");
+const { env } = require("../index");
+const { env, gitRepo, localPath } = require("../index");
+const { localPath } = require("../index");
+const { GITHUB_EMAIL, GITHUB_NAME } = require("../index");
 
 
 async function setGitUser(tools) {
