@@ -9,6 +9,6 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - run: |
-        npm ci; npm test
+      - uses: actions/checkout@master
+      - run: |
+          npm ci; npm test

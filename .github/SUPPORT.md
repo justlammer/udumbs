@@ -16,8 +16,8 @@ If you cannot find an existing issue that describes your bug or feature, submit 
 
 File a single issue per problem and feature request.
 
-* Do not enumerate multiple bugs or feature requests in the same issue.
-* Do not add your issue as a comment to an existing issue unless it's for the identical input. Many issues look similar, but have different causes.
+- Do not enumerate multiple bugs or feature requests in the same issue.
+- Do not add your issue as a comment to an existing issue unless it's for the identical input. Many issues look similar, but have different causes.
 
 The more information you can provide, the more likely someone will be successful reproducing the issue and finding a fix.
 
@@ -25,5 +25,5 @@ You are now ready to [create a new issue](https://github.com/utenx/gh-dump-conte
 
 ## Closure policy
 
-* Issues that don't have the information requested above (when applicable) will be closed immediately and the poster directed to the support guidelines.
-* Issues that go a week without a response from original poster are subject to closure at my discretion.
+- Issues that don't have the information requested above (when applicable) will be closed immediately and the poster directed to the support guidelines.
+- Issues that go a week without a response from original poster are subject to closure at my discretion.

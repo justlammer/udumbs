@@ -21,8 +21,8 @@ about: Create a report to help us improve
 
 ### Configuration
 
-* Repository URL (if public): 
-* Build URL (if public): 
+- Repository URL (if public):
+- Build URL (if public):
 
 ```yml
 # paste your YAML workflow file here and remove sensitive data
