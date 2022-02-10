@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function appendDataToFile(path, data) {
+async function appendDataToFile(path, data) {
   await fs.promises.appendFile(path, data);
   const buff = await fs.promises.readFile(path);
 
