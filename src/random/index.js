@@ -7,7 +7,7 @@
 
 // function getRandomInt(min, max) {
   
-const getRandomInt = async (min, max) => {
+async function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
 
