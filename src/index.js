@@ -33,7 +33,9 @@ const setGitUser = async (tools) => {
   await tools.exec('git', ['config', '--global', 'user.name', GITHUB_NAME]);
 };
 
-const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
+const commitsToMake = async (MIN_COMMITS, MAX_COMMITS) => {
+  await getRandomInt(MIN_COMMITS, MAX_COMMITS);
+}
 
 const getContentFile = () => `Commits: ${new Date().toISOString()} - ${msgRefference}`;
 const getCommitMessage = () => `${env.GITHUB_COMMIT_MESSAGE} - ${new Date().toISOString()}`;
