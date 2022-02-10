@@ -8,4 +8,4 @@ export async function appendDataToFile(path, data) {
   console.log(`Content : ${content}`);
 }
 
-// exports.appendDataToFile = appendDataToFile;
+exports.appendDataToFile = appendDataToFile;
