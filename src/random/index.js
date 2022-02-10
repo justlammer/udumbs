@@ -8,11 +8,11 @@
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-
+ 
   if (min > max || Math.min(min, max) < 0) {
-    throw new Error("min and max must be a positive integer range");
+    throw new Error('min and max must be a positive integer range');
   }
-
+ 
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
