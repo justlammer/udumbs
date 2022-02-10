@@ -25,16 +25,16 @@ const msgRefference = 'Generated via https://github.com/marketplace/actions/arti
 
 const GITHUB_NAME = env.GITHUB_NAME;
 const GITHUB_EMAIL = env.GITHUB_EMAIL;
-const MIN_COMMITS = env.MIN_COMMITS;
-const MAX_COMMITS = env.MAX_COMMITS;
+// const MIN_COMMITS = env.MIN_COMMITS;
+// const MAX_COMMITS = env.MAX_COMMITS;
 
 const setGitUser = async (tools) => {
   await tools.exec('git', ['config', '--global', 'user.email', GITHUB_EMAIL]);
   await tools.exec('git', ['config', '--global', 'user.name', GITHUB_NAME]);
 };
 
-const commitsToMake = async (MIN_COMMITS, MAX_COMMITS) => {
-  await getRandomInt(MIN_COMMITS, MAX_COMMITS);
+const commitsToMake = async (env.COMMITS, env.MAX_COMMITS) => {
+  await getRandomInt(env.MIN_COMMITS, env.MAN_COMMITS);
 }
 
 const getContentFile = () => `Commits: ${new Date().toISOString()} - ${msgRefference}`;
