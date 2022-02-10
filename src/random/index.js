@@ -7,7 +7,7 @@
 
 // function getRandomInt(min, max) {
   
-async function getRandomInt(min, max) {
+export function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
 
@@ -18,4 +18,4 @@ async function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-exports.getRandomInt = getRandomInt;
+// exports.getRandomInt = getRandomInt;

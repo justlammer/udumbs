@@ -3,7 +3,7 @@ const autoParse = require('auto-parse');
 const dotenv = require('dotenv-extended');
 const getRandomInt = require('./random');
 const { Toolkit } = require('actions-toolkit');
-const { appendDataToFile } = require("./appendfiles");
+const { appendDataToFile } = require("./utils");
 
 const env = autoParse({
   GIT_BRANCH:
@@ -25,17 +25,15 @@ const msgRefference = 'Generated via https://github.com/marketplace/actions/arti
 
 const GITHUB_NAME = env.GITHUB_NAME;
 const GITHUB_EMAIL = env.GITHUB_EMAIL;
-// const MIN_COMMITS = env.MIN_COMMITS;
-// const MAX_COMMITS = env.MAX_COMMITS;
+const MIN_COMMITS = env.MIN_COMMITS;
+const MAX_COMMITS = env.MAX_COMMITS;
 
 const setGitUser = async (tools) => {
   await tools.exec('git', ['config', '--global', 'user.email', GITHUB_EMAIL]);
   await tools.exec('git', ['config', '--global', 'user.name', GITHUB_NAME]);
 };
 
-const commitsToMake = async (env.COMMITS, env.MAX_COMMITS) => {
-  await getRandomInt(env.MIN_COMMITS, env.MAN_COMMITS);
-}
+const commitsToMake = getRandomInt(MIN_COMMITS, MAX_COMMITS);
 
 const getContentFile = () => `Commits: ${new Date().toISOString()} - ${msgRefference}`;
 const getCommitMessage = () => `${env.GITHUB_COMMIT_MESSAGE} - ${new Date().toISOString()}`;

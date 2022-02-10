@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-async function appendDataToFile(path, data) {
+export async function appendDataToFile(path, data) {
   await fs.promises.appendFile(path, data);
   const buff = await fs.promises.readFile(path);
 
@@ -8,4 +8,4 @@ async function appendDataToFile(path, data) {
   console.log(`Content : ${content}`);
 }
 
-exports.appendDataToFile = appendDataToFile;
+// exports.appendDataToFile = appendDataToFile;
