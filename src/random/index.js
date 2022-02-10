@@ -7,7 +7,7 @@
 
 // function getRandomInt(min, max) {
   
-async function getRandomInt(min, max) {
+function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
 
