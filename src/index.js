@@ -3,7 +3,7 @@ const autoParse = require('auto-parse');
 const dotenv = require('dotenv-extended');
 const getRandomInt = require('./random');
 const { Toolkit } = require('actions-toolkit');
-const { appendDataToFile } = require("./utils");
+const { appendDataToFile } = require("./appendfiles");
 
 const env = autoParse({
   GIT_BRANCH:
