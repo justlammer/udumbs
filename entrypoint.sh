@@ -12,7 +12,7 @@ set -o noglob                                # disable glob
 set -- $newstr2                              # split+glob with glob disabled.
 
 ndates=( $(printf '"%s"\n' $@) )
-inarray=$(echo ${ndates[@]} | grep -io ${DATE} | wc -w)
+inarray=$(echo ${ndates[@]} | grep -iwo ${DATE} | wc -w)
 
 echo ${ndates[@]}
 
