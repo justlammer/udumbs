@@ -7,4 +7,5 @@ COPY . /app/
 # RUN ls -al /github/workspace
 
 # ENTRYPOINT ["sh", "-c", "ls -al /github/workspace && ls -al /github/workflow && ls -al /github/home && ls -al /app && cd /app && npm install --production && npm start"]
-ENTRYPOINT ["sh", "-c", "cd /app && npm install --production && npm start"]
+# ENTRYPOINT ["sh", "-c", "cd /app && npm install --production && npm start"]
+ENTRYPOINT [ "/app/entrypoint.sh" ]
