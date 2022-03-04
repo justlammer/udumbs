@@ -12,9 +12,9 @@ set -o noglob                                # disable glob
 set -- $newstr2                              # split+glob with glob disabled.
 
 ndates=( $(printf '"%s"\n' $@) )
+#inarray=$(echo ${ndates[@]} | grep -iwo ${DATE} | wc -w)
+#echo ${ndates[@]}
 inarray=$(echo ${ndates[@]} | grep -iwo ${DATE} | wc -w)
-
-echo ${ndates[@]}
 
 if ! [ "$inarray" -eq 0 ] ; then
    echo "Found"
