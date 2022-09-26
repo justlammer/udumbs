@@ -1,5 +1,5 @@
 {
-  "name": "artificial-grass",
+  "name": "github-contribution-graph-action",
   "author": "Gibran <gibransvarga@gmail.com>",
   "version": "1.0.0",
   "description": "Manipulate github contribution graph",
@@ -16,7 +16,8 @@
     "jest": "^26.0.1"
   },
   "keywords": [
-    "Github Contribution Graph"
+    "Github Contribution Graph",
+    "Github Actions"
   ],
   "license": "MIT",
   "scripts": {

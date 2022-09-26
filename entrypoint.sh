@@ -2,22 +2,49 @@
 
 set -e
 
-IFS=", "
+normalize() {
+  echo "$1" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z]//g'
+}
 
-DATE=$(date +%A)
-newstr=$(echo $NO_COMMITS | sed 's/\[//g' )    # remove [
-newstr2=$(echo $newstr | sed 's/\]//g' )     # remove ]
+function basic() {
+  echo $MODE
+  IFS=", "
+  DATE=$(date +%A)
+  NO_COMMITS=$(echo $NO_COMMITS | sed 's/\[//g' )
+  NO_COMMITS=$(echo $newstr | sed 's/\]//g' )
 
-set -o noglob                                # disable glob
-set -- $newstr2                              # split+glob with glob disabled.
+  set -o noglob
+  set -- $NO_COMMITS
 
-ndates=( $(printf '"%s"\n' $@) )
-#inarray=$(echo ${ndates[@]} | grep -iwo ${DATE} | wc -w)
-#echo ${ndates[@]}
-inarray=$(echo ${ndates[@]} | grep -iwo ${DATE} | wc -w)
+  ndates=( $(printf '"%s"\n' $@) )
+  inarray=$(echo ${ndates[@]} | grep -iwo ${DATE} | wc -w)
+  if ! [ "$inarray" -eq 0 ] ; then
+    echo "No commit."
+  else
+    # npm install --production && npm start
+    npm install --production && npm start
+  fi
+}
 
-if ! [ "$inarray" -eq 0 ] ; then
-   echo "Found"
-else
-   echo "Not Found"
-fi
+function realistic() {
+  echo $MODE
+  SHUFFLE=$(shuf -i 0-1 -n1)
+  if [ $SHUFFLE -eq 0 ]; then
+    npm install --production && npm start
+  else
+    echo "No commit."
+  fi
+}
+
+function run() {
+  MODE="$(normalize "$MODE")"
+  if [[ $MODE == "realistic" ]]; then
+    realistic "$@"
+  elif [[ $MODE == "basic" ]]; then
+    basic "$@"
+  else
+    echo "Please specify your preferred mode to run."
+  fi
+}
+
+run "${@:-.}"
