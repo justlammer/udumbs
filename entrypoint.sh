@@ -21,8 +21,8 @@ function basic() {
   if ! [ "$inarray" -eq 0 ] ; then
     echo "No commit."
   else
-    # npm install --production && npm start
-    npm install --production && npm start
+    # cd /app && npm install --production && npm start
+    cd /app; npm install --production; npm start
   fi
 }
 
@@ -30,7 +30,7 @@ function realistic() {
   echo $MODE
   SHUFFLE=$(shuf -i 0-1 -n1)
   if [ $SHUFFLE -eq 0 ]; then
-    npm install --production && npm start
+    cd /app; npm install --production; npm start
   else
     echo "No commit."
   fi
